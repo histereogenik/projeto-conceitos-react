@@ -1,3 +1,5 @@
+import Perfil from "./components/Perfil";
+
 function App() {
   const nome = 'gian';
 
@@ -13,6 +15,7 @@ function App() {
 
   return (
     <>
+      <Perfil />
       <h1>Olá, {pessoa.nome}</h1>
       {retornaNome()}
       <h2>subtitulo</h2>
