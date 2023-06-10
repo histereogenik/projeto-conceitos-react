@@ -5,6 +5,7 @@ import styles from './ReposList.module.css';
 const ReposList = ({ nomeUsuario }) => {
     const [repos, setRepos] = useState([]);
     const [estaCarregando, setEstaCarregando] = useState(true);
+    const [deuErro, setDeuErro] = useState(false);
 
     useEffect(() => {
         setEstaCarregando(true);
@@ -13,9 +14,22 @@ const ReposList = ({ nomeUsuario }) => {
         .then(resJson => {
             setTimeout(() => {
                 setEstaCarregando(false);
-                setRepos(resJson);}, 2000)
+                setRepos(resJson);
+            }, 2000);
+        })
+        .catch(e => {
+            setDeuErro(true);
+            console.log(e);
         })
     }, [nomeUsuario])
+
+    if (deuErro) {
+        return  (
+            <div className="container">
+                <h1>Erro ao carregar os repositórios, cheque o nome de usuário novamente.</h1>
+            </div>
+        )
+    }
 
     return (
         <div className="container">
